@@ -1,14 +1,42 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view />
+    <button @click="handleChange">隐藏/显示</button>
+    <transition enter-active-class="animated bounce" leave-active-class="animated bounceOutRight">
+      <HelloWorld msg="Welcome to Your Vue.js App" v-show="flag" />
+    </transition>
   </div>
 </template>
-
+<script>
+import HelloWorld from "@/components/HelloWorld.vue";
+export default {
+  components: {
+    HelloWorld,
+  },
+  data() {
+    return {
+      flag: false,
+    };
+  },
+  methods: {
+    handleChange() {
+      this.flag = !this.flag;
+      console.log("this.flag:>> ", this.flag);
+    },
+  },
+};
+</script>
 <style lang="scss">
+.liu-enter-active,
+.liu-leave-active {
+  // opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.liu-enter,
+.liu-leave-to {
+  opacity: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
